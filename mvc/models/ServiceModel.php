@@ -1,42 +1,31 @@
 <?php
-<<<<<<< HEAD
-    class ServiceModel extends DB{
-        public function getAllService(){
-            $q = "SELECT * FROM service";
-            return mysqli_query($this->connection, $q);
-        }
-        
-        public function suadichvu($id, $ten, $soluong, $gia){
-            $query = "UPDATE service SET gia = '$gia', soluong = '$soluong', tendichvu = '$ten' WHERE id = '$id'";
-
-            mysqli_query($this->connection, $query);
-        }
-
-        public function getService($id){
-            $query = "SELECT * FROM service WHERE id = '$id'";
-
-            mysqli_query($this->connection, $query);
-        }
-
-        public function addService($ten, $gia, $soluong){
-            $query = "INSERT INTO service(id, tendichvu, gia, soluong) VALUES('', '$ten', '$gia', '$soluong')";
-
-            mysqli_query($this->connection, $query);
-        }
-
-        public function DeleteService($id){
-            $query = "DELETE from service where id = '$id'";
-
-            mysqli_query($this->connection, $query);
-        }
-=======
 class ServiceModel extends DB
 {
+
+    public function addService($name, $sohopdong, $tendichvu, $soluong, $gia, $thanhtien)
+    {
+        $query = "INSERT INTO dichvudadangki VALUES('', '$name', '$sohopdong', '$tendichvu', '$soluong', '$gia', '$thanhtien')";
+
+        mysqli_query($this->connection, $query);
+    }
+
+    public function layDichVuDaDatVoiSHD($sohopdong)
+    {
+        $query = "SELECT * FROM dichvudadangki WHERE sohopdong = '$sohopdong'";
+
+        return mysqli_query($this->connection, $query);
+    }
+
     public function getAllService()
     {
         $q = "SELECT * FROM service";
         return mysqli_query($this->connection, $q);
->>>>>>> 02b8d5f (push phan dich vu khach hang)
+    }
+
+    public function layDichVuDaDangKyQuaSHD($sohopdong)
+    {
+        $q = "SELECT * FROM dichvudadangki WHERE sohopdong ='$sohopdong'";
+        return mysqli_query($this->connection, $q);
     }
 
     public function getAService($id)
@@ -44,6 +33,9 @@ class ServiceModel extends DB
         $q = "SELECT * FROM service WHERE id = '$id'";
         return mysqli_query($this->connection, $q);
     }
+
+
+
 
     public function themdichvu($tendichvu, $giadichvu)
     {
@@ -66,5 +58,10 @@ class ServiceModel extends DB
         $query = "UPDATE  service SET tendichvu = '$tendichvu', gia='$gia'  WHERE id = '$id'";
 
         mysqli_query($this->connection, $query);
+    }
+    public function getService($id)
+    {
+        $q = "SELECT * FROM service WHERE id = '$id'";
+        return mysqli_query($this->connection, $q);
     }
 }

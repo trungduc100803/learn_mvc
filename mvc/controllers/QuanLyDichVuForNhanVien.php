@@ -5,12 +5,11 @@ class QuanLyDichVuForNhanVien extends Controller
     {
         $serviceModel = $this->model("ServiceModel");
 
-        if (isset($_POST['themdv'])){
-            $tendv = $_POST['ten'];
-            $giadv = $_POST['gia'];
-            $soluongdv = $_POST['soluong'];
+        if (isset($_POST['themdichvu'])) {
+            $tendichvu = $_POST['tendichvu'];
+            $giadichvu = $_POST['giadichvu'];
 
-            $serviceModel->addService($tendv, $giadv, $soluongdv);
+            $serviceModel->themdichvu($tendichvu, $giadichvu);
         }
 
         $dataservice = $serviceModel->getAllService();
@@ -19,33 +18,33 @@ class QuanLyDichVuForNhanVien extends Controller
             "container" => "QuanLyDichVuForNhanVien",
             "dataService" => $dataservice,
         ]);
-
     }
 
-    public function sua($id){
+    public function sua($id)
+    {
 
         $serviceModel = $this->model("ServiceModel");
 
 
-        if (isset($_POST['btnsuadv'])){
+        if (isset($_POST['btnsuadv'])) {
             $ten = $_POST['txtten'];
             $soluong = $_POST['txtsoluong'];
             $gia = $_POST['txtgiadv'];
 
-            $serviceModel->suadichvu($id ,$ten, $soluong, $gia);
+            $serviceModel->suadichvu($id, $ten, $soluong, $gia);
         }
 
-        if(isset($_POST['btnxoa'])){
+        if (isset($_POST['btnxoa'])) {
             $serviceModel->DeleteService($id);
             header('Location: ../../../learn_mvc/QuanLyDichVuForNhanVien');
         }
 
         $dataservice = $serviceModel->getService($id);
 
-        $this->view("fullLayout",[
+        $this->view("fullLayout", [
             "container" => "suadichvu",
             "service" => $dataservice,
-            
+
         ]);
     }
 }

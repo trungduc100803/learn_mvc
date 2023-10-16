@@ -10,9 +10,9 @@ class khachhanagdatphong extends Controller
 
 
 
-        $dataRoomAlone = $roomModel->getRoomType("Phòng đơn");
-        $dataRoomCouple = $roomModel->getRoomType("Phòng đôi");
-        $dataRoomFamily = $roomModel->getRoomType("Phòng gia đình");
+        $dataRoomAlone = $roomModel->getRoomTypeAndNoOrder("Phòng đơn");
+        $dataRoomCouple = $roomModel->getRoomTypeAndNoOrder("Phòng đôi");
+        $dataRoomFamily = $roomModel->getRoomTypeAndNoOrder("Phòng gia đình");
 
 
 

@@ -14,7 +14,7 @@ class RoomModel extends DB
 
         return mysqli_query($this->connection, $query);
     }
-  
+
     public function getTenKH($roomID)
     {
         $query = "SELECT name FROM rooms WHERE roomID = '$roomID'";
@@ -34,6 +34,13 @@ class RoomModel extends DB
     public function getRoomType($loaiphong)
     {
         $query = "SELECT * FROM rooms WHERE loaiphong = '$loaiphong'";
+
+        return mysqli_query($this->connection, $query);
+    }
+
+    public function getRoomTypeAndNoOrder($loaiphong)
+    {
+        $query = "SELECT * FROM rooms WHERE loaiphong = '$loaiphong' AND trangthaiphong = 'Đang trống'";
 
         return mysqli_query($this->connection, $query);
     }
@@ -65,11 +72,7 @@ class RoomModel extends DB
         mysqli_query($this->connection, $query);
     }
 
-<<<<<<< HEAD
-    public function updatetrangthaiphong($roomID, $trangthaiPhong)
-=======
     public function updateTrangthaiphong($roomID, $trangthaiPhong)
->>>>>>> 02b8d5f (push phan dich vu khach hang)
     {
         $query  = "UPDATE rooms SET  trangthaiphong = '$trangthaiPhong' WHERE roomID = '$roomID'";
 

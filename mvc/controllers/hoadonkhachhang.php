@@ -6,13 +6,31 @@ class hoadonkhachhang extends Controller
     public function start()
     {
 
-        $roomModel = $this->model("RoomModel");
+        $HoaDonModel = $this->model("HoaDonModel");
 
-        $dataRooms = $roomModel->getARoomForName($_SESSION['username']);
+        $dataHoaDon = $HoaDonModel->layTatCaHoaDon($_SESSION['username']);
+
         $this->view("defaultLayout", [
             "container" => "hoadonkhachhang",
-            "dataRooms" => $dataRooms
+            "dataHoaDon" => $dataHoaDon
 
+        ]);
+    }
+
+    public function chitiet($sohopdong)
+    {
+
+        $ServiceModel = $this->model("ServiceModel");
+        $RoomOrdered = $this->model("RoomOrdered");
+
+        $datadichvu = $ServiceModel->layDichVuDaDangKyQuaSHD($sohopdong);
+        $dataPhongDaDat = $RoomOrdered->layPhongDaDatQuaSHD($sohopdong);
+
+
+        $this->view("defaultLayout", [
+            "container" => "chitiethopdongkhachhang",
+            "datadichvu" => $datadichvu,
+            "dataPhongDaDat" => $dataPhongDaDat
         ]);
     }
 }

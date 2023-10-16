@@ -27,9 +27,6 @@
                     </li>
                     <ul class="dropdown-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="../../../../learn_mvc/hoadonkhachhang">Hóa đơn</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="../../../../learn_mvc/taikhoancanhan">Tài khoản</a>
                         </li>
                         <li class="nav-item">

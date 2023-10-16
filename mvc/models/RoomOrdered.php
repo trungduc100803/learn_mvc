@@ -15,4 +15,11 @@ class RoomOrdered extends DB
 
         return mysqli_query($this->connection, $query);
     }
+
+    public function layPhongDaDatQuaSHD($sohopdong)
+    {
+        $query = "SELECT * FROM rooms_ordered WHERE sohopdong = '$sohopdong'";
+
+        return mysqli_query($this->connection, $query);
+    }
 }

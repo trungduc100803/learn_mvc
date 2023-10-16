@@ -43,15 +43,17 @@
             $i = 0;
             while ($room = mysqli_fetch_array($data['roomAlone'])) {
                 $status = "";
+
                 if ($room['trangthaiphong'] == "Đã đặt") {
                     $status = "dadat";
                 } else if ($room['trangthaiphong'] == "Đã nhận") {
                     $status = "danhan";
                 }
                 if ($room['trangthaiphong'] == "Đang trống") {
+
             ?>
 
-                    <a href="./chitietphong/start/<?php echo $room['roomID'] ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px; ">
+                    <a href="./chitietphong/start/<?php echo $room['roomID']  ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px; ">
                         <div class="phong_top" style="display: flex; align-items: stretch; justify-content: space-between;">
                             <p><?php echo $room['roomID'] ?></p>
                             <div class="trangthaiphong"><?php echo $room['trangthaiphong'] ?></div>
@@ -74,7 +76,7 @@
                     $datangaydat = $hoadonModel->getAHoaDon($room['name'], $room['roomID']);
                     $ngaydat = mysqli_fetch_row($datangaydat);
                 ?>
-                    <a href="./chitietphong/start/<?php echo $room['roomID'] ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px; ">
+                    <a href="./chitietphong/start/<?php echo $room['roomID']  ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px; ">
                         <div class="phong_top" style="display: flex; align-items: stretch; justify-content: space-between;">
                             <p><?php echo $room['roomID'] ?></p>
                             <div class="trangthaiphong"><?php echo $room['trangthaiphong'] ?></div>
@@ -136,7 +138,7 @@
                     $datangaydat = $hoadonModel->getAHoaDon($room['name'], $room['roomID']);
                     $ngaydat = mysqli_fetch_row($datangaydat);
                 ?>
-                    <a href="./chitietphong/start/<?php echo $room['roomID'] ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
+                    <a href="./chitietphong/start/<?php echo $room['roomID']  ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
                         <div class="phong_top" style="display: flex; align-items: stretch; justify-content: space-between;">
                             <p><?php echo $room['roomID'] ?></p>
                             <div class="trangthaiphong"><?php echo $room['trangthaiphong'] ?></div>
@@ -163,6 +165,7 @@
         <div class="danhsachphong" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; color: black; text-decoration: none;">
             <?php
             $i = 0;
+            $ngaydat = mysqli_fetch_row($datangaydat);
             while ($room = mysqli_fetch_array($data['roomFamily'])) {
                 $status = "";
                 if ($room['trangthaiphong'] == "Đã đặt") {
@@ -173,7 +176,7 @@
                 if ($room['trangthaiphong'] == "Đang trống") {
             ?>
 
-                    <a href="./chitietphong/start/<?php echo $room['roomID'] ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
+                    <a href="./chitietphong/start/<?php echo $room['roomID']  ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
                         <div class="phong_top" style="display: flex; align-items: stretch; justify-content: space-between;">
                             <p><?php echo $room['roomID'] ?></p>
                             <div class="trangthaiphong"><?php echo $room['trangthaiphong'] ?></div>
@@ -261,7 +264,7 @@
                         $datangaydat = $hoadonModel->getAHoaDon($room['name'], $room['roomID']);
                         $ngaydat = mysqli_fetch_row($datangaydat);
                     ?>
-                        <a href="./chitietphong/start/<?php echo $room['roomID'] ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px; ">
+                        <a href="./chitietphong/start/<?php echo $room['roomID']  ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px; ">
                             <div class="phong_top" style="display: flex; align-items: stretch; justify-content: space-between;">
                                 <p><?php echo $room['roomID'] ?></p>
                                 <div class="trangthaiphong"><?php echo $room['trangthaiphong'] ?></div>
@@ -289,6 +292,7 @@
             <div class="danhsachphong" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; color: black; text-decoration: none;">
                 <?php
                 $i = 0;
+                $ngaydat = mysqli_fetch_row($datangaydat);
                 while ($room = mysqli_fetch_array($data['roomCouple'])) {
                     $status = "";
                     if ($room['trangthaiphong'] == "Đã đặt") {
@@ -299,7 +303,7 @@
                     if ($room['trangthaiphong'] == "Đang trống") {
                 ?>
 
-                        <a href="./chitietphong/start/<?php echo $room['roomID'] ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
+                        <a href="./chitietphong/start/<?php echo $room['roomID']  ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
                             <div class="phong_top" style="display: flex; align-items: stretch; justify-content: space-between;">
                                 <p><?php echo $room['roomID'] ?></p>
                                 <div class="trangthaiphong"><?php echo $room['trangthaiphong'] ?></div>
@@ -348,6 +352,7 @@
             <div class="danhsachphong" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; color: black; text-decoration: none;">
                 <?php
                 $i = 0;
+                $ngaydat = mysqli_fetch_row($datangaydat);
                 while ($room = mysqli_fetch_array($data['roomFamily'])) {
                     $status = "";
                     if ($room['trangthaiphong'] == "Đã đặt") {
@@ -358,7 +363,7 @@
                     if ($room['trangthaiphong'] == "Đang trống") {
                 ?>
 
-                        <a href="./chitietphong/start/<?php echo $room['roomID'] ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
+                        <a href="./chitietphong/start/<?php echo $room['roomID']  ?>" class="phong <?php echo $status; ?>" style="color: black; text-decoration: none; cursor: pointer;padding: 14px; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; width: 30%; margin-bottom: 20px;">
                             <div class="phong_top" style="display: flex; align-items: stretch; justify-content: space-between;">
                                 <p><?php echo $room['roomID'] ?></p>
                                 <div class="trangthaiphong"><?php echo $room['trangthaiphong'] ?></div>

@@ -76,17 +76,15 @@ $services = $data['dataService'];
                 </div>
                 <div class="modal-body">
                     <label for="">Tên dịch vụ</label>
-                    <input style="margin-top: 6px; margin-bottom: 20px;" type="text" name="ten" class="form-control" aria-label="" aria-describedby="basic-addon1">
+                    <input name="tendichvu" style="margin-top: 6px; margin-bottom: 20px;" type="text" class="form-control" aria-label="" aria-describedby="basic-addon1">
 
-                    <label for="">Số lượng</label>
-                    <input style="margin-top: 6px; margin-bottom: 20px;" type="number" name="soluong" class="form-control" aria-label="" aria-describedby="basic-addon1">
 
                     <label for="">Giá</label>
-                    <input style="margin-top: 6px; margin-bottom: 20px;" type="number" name="gia" class="form-control" aria-label="" aria-describedby="basic-addon1">
+                    <input name="giadichvu" style="margin-top: 6px; margin-bottom: 20px;" type="text" class="form-control" aria-label="" aria-describedby="basic-addon1">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" name="themdv" class="btn btn-primary">Thêm</button>
+                    <button type="submit" name="themdichvu" class="btn btn-primary">Thêm</button>
                 </div>
             </div>
         </div>

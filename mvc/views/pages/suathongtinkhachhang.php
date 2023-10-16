@@ -12,7 +12,7 @@ $dataC  = mysqli_fetch_row($customer);
             <div class="modal-body">
 
                 <label for="">Tên khách hàng</label>
-                <input name="tenkhachhang" style="margin-top: 6px; margin-bottom: 20px;" value="<?php echo $dataC[1] ?>" type="text" class="form-control" aria-label="" aria-describedby="basic-addon1">
+                <input disabled name="tenkhachhang" style="margin-top: 6px; margin-bottom: 20px;" value="<?php echo $dataC[1] ?>" type="text" class="form-control" aria-label="" aria-describedby="basic-addon1">
 
                 <label for="">Số CCCD</label>
                 <input name="cccd" style="margin-top: 6px; margin-bottom: 20px;" value="<?php echo $dataC[2] ?>" type="text" class="form-control" aria-label="" aria-describedby="basic-addon1">
@@ -26,7 +26,7 @@ $dataC  = mysqli_fetch_row($customer);
                 <label for="">Quốc tịch</label>
                 <select name="quoctich" style="margin-top: 6px; margin-bottom: 20px;" value="<?php echo $dataC[5] ?>" class="form-select" aria-label="Default select example">
                     <option selected>Quốc tịch</option>
-                    <option value="Việt Nam">Việt Nam</option>
+                    <option value="Việt Nam">Việt Nam</option>~
                     <option value="Hàn Quốc">Hàn Quốc</option>
                     <option value="Singapor">Singapor</option>
                 </select>

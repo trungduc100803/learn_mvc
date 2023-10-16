@@ -9,65 +9,130 @@ class chitietphong extends Controller
         $serviceModel = $this->model("ServiceModel");
         $hoaDonModel = $this->model("HoaDonModel");
 
+
+        $dataService = $serviceModel->getAllService();
+        $dataRoom =  $roomModel->getARoom($roomID);
+        $room = mysqli_fetch_row($dataRoom);
+        // $tenkhachhang = $room[3];
+
+        // print_r($tenkhachhang);
+        // $datangaydat = $hoaDonModel->getAHoaDon($tenkhachhang, $roomID);
+        // $numrow = mysqli_num_rows($datangaydat);
+        // $datangaydat->data_seek($numrow - 1);
+        // $ngaydat = $datangaydat->fetch_row();
+
+        // $dataR = $roomOrdered->getSHD($roomID, $tenkhachhang, $ngaydat[4]);
+        // $sohopdong = mysqli_fetch_assoc($dataR);
+
+        // $dataDichvu = $serviceModel->layDichVuDaDatVoiSHD($sohopdong['sohopdong']);
+        // print_r($sohopdong['sohopdong']);
+
+
         ///xu ly dat phong
         if (isset($_POST['datphong'])) {
+            $loaikh = $_POST['loaikhachhang'];
 
-            // lay du lieu tu form dat phong
-            $tenkhachhang = $_POST['tenkhachhang'];
-            $cccd = $_POST['cccd'];
-            $sdt = $_POST['sdt'];
-            $ngaysinh = $_POST['ngaysinh'];
-            $quoctich = $_POST['quoctich'];
-            $diachi = $_POST['diachi'];
-            $gioitinh = $_POST['gioitinh'];
-            $ngaydat = $_POST['ngaydat'];
-            $loaiphong =  $roomModel->getLoaiPhong($roomID);
-            $gia =  $roomModel->getGiaPhong($roomID);
+            if ($loaikh == "Khách hàng mới") {
+                // lay du lieu tu form dat phong
+                $tenkhachhang = $_POST['tenkhachhang'];
+                $cccd = $_POST['cccd'];
+                $sdt = $_POST['sdt'];
+                $ngaysinh = $_POST['ngaysinh'];
+                $quoctich = $_POST['quoctich'];
+                $diachi = $_POST['diachi'];
+                $gioitinh = $_POST['gioitinh'];
+                $ngaydat = date('Y-m-d H:i:s');
+                $phuongthucthanhtoan = $_POST['phuongthucthanhtoan'];
+                $tiencoc = $_POST['tiencoc'];
+                $loaiphong =  $roomModel->getLoaiPhong($roomID);
+                $gia =  $roomModel->getGiaPhong($roomID);
 
 
-            //kiem tra xem có tồn tại kh
-            $checkCustomer = $customerModel->getACustomer($tenkhachhang);
-            $dataCheckCustomer = mysqli_num_rows($checkCustomer);
 
-<<<<<<< HEAD
-            if ($dataCheckCustomer > 0) {
-                $addCustomer = $customerModel->addCustomer($tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh, $ngaydat, $loaiphong, $gia);
-                $roomOrdered->addRoomOrdered($roomID, $ngaydat, '', $loaiphong, $gia, $tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh);
-                $roomModel->updateStatusRoom($roomID, 'Đã đặt', $tenkhachhang);
-                $customerModel->addCustomer($tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh, 1, 'Đã đặt');
-                $hoaDonModel->addHoaDon($tenkhachhang, $roomID, $ngaydat, '', '', 0);
-=======
-            $dataC = mysqli_fetch_row($checkCustomer);
+                //kiem tra xem có tồn tại kh
+                $checkCustomer = $customerModel->getACustomer($tenkhachhang);
+                $dataCheckCustomer = mysqli_num_rows($checkCustomer);
 
-            if ($dataCheckCustomer > 0 && $dataC[9] == "Đã đặt") {
-                echo "err";
-            } else if ($dataCheckCustomer > 0 && $dataC[9] == "Đã trả") {
-                $roomOrdered->addRoomOrdered($roomID, $ngaydat, '', $loaiphong, $gia, $tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh);
-                $roomModel->updateStatusRoom($roomID, 'Đã đặt', $tenkhachhang);
-                $customerModel->suatrangdat($tenkhachhang);
+                $dataC = mysqli_fetch_row($checkCustomer);
 
-                $dataR = $roomOrdered->getSHD($roomID, $tenkhachhang, $ngaydat);
-                $shd = mysqli_fetch_row($dataR);
+                if ($dataCheckCustomer > 0 && $dataC[9] == "Đã đặt") {
+                    echo '<script>alert("Khách hàng vẫn đang đặt phòng");</script>';
+                    echo '<script>window.history.back();</script>';
+                } else if ($dataCheckCustomer > 0 && $dataC[9] == "Đã trả") {
+                    $roomOrdered->addRoomOrdered($roomID, $ngaydat, '', $loaiphong, $gia, $tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh);
+                    $roomModel->updateStatusRoom($roomID, 'Đã đặt', $tenkhachhang);
+                    $customerModel->suatrangdat($tenkhachhang);
 
-                $hoaDonModel->addHoaDon($tenkhachhang, $roomID, $ngaydat, '', '', 0, $shd[5]);
->>>>>>> 02b8d5f (push phan dich vu khach hang)
+                    $dataR = $roomOrdered->getSHD($roomID, $tenkhachhang, $ngaydat);
+                    $shd = mysqli_fetch_row($dataR);
+
+                    $hoaDonModel->addHoaDon($tenkhachhang, $roomID, $ngaydat, '', '', 0, $shd[5], $tiencoc, $phuongthucthanhtoan);
+                } else {
+                    $roomOrdered->addRoomOrdered($roomID, $ngaydat, '', $loaiphong, $gia, $tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh);
+                    $roomModel->updateStatusRoom($roomID, 'Đã đặt', $tenkhachhang);
+                    $customerModel->addCustomer($tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh, 1, 'Đã đặt');
+
+                    $dataR = $roomOrdered->getSHD($roomID, $tenkhachhang, $ngaydat);
+                    $shd = mysqli_fetch_row($dataR);
+
+                    $hoaDonModel->addHoaDon($tenkhachhang, $roomID, $ngaydat, '', '', 0, $shd[5], $tiencoc, $phuongthucthanhtoan);
+                }
             } else {
-                $roomOrdered->addRoomOrdered($roomID, $ngaydat, '', $loaiphong, $gia, $tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh);
-                $roomModel->updateStatusRoom($roomID, 'Đã đặt', $tenkhachhang);
-                $customerModel->addCustomer($tenkhachhang, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh, 1, 'Đã đặt');
+                $phuongthucthanhtoan = $_POST['phuongthucthanhtoan'];
+                $tiencoc = $_POST['tiencoc'];
+                $username = $_POST['tenkhachhang'];
+                $currentDateTime = date('Y-m-d H:i:s');
 
-                $dataR = $roomOrdered->getSHD($roomID, $tenkhachhang, $ngaydat);
-                $shd = mysqli_fetch_row($dataR);
+                //kiem tra xem có tồn tại kh
+                $checkCustomer = $customerModel->getACustomer($username);
+                $dataCheckCustomer = mysqli_num_rows($checkCustomer);
 
-                $hoaDonModel->addHoaDon($tenkhachhang, $roomID, $ngaydat, '', '', 0, $shd[5]);
+                //get room 
+                $dataRoom = mysqli_fetch_assoc($roomModel->getARoom($roomID));
+                $loaiphong = $dataRoom['loaiphong'];
+                $gia = $dataRoom['gia'];
+
+                $dataC = mysqli_fetch_assoc($checkCustomer);
+                $cccd = $dataC['cccd'];
+                $sdt = $dataC['sdt'];
+                $ngaysinh = $dataC['ngaysinh'];
+                $quoctich = $dataC['quoctich'];
+                $diachi = $dataC['diachi'];
+                $gioitinh = $dataC['gioitinh'];
+
+                if ($dataCheckCustomer > 0 && $dataC['dangdat'] == "Đã đặt") {
+                    echo '<script>alert("Khách hàng vẫn đang đặt phòng");</script>';
+                    echo '<script>window.history.back();</script>';
+                } else if ($dataCheckCustomer > 0 && $dataC['dangdat'] == "Đã trả") {
+                    $roomOrdered->addRoomOrdered($roomID, $currentDateTime, '', $loaiphong, $gia, $username, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh);
+                    $roomModel->updateStatusRoom($roomID, 'Đã đặt', $username);
+                    $customerModel->suatrangdat($username);
+
+                    $dataR = $roomOrdered->getSHD($roomID, $username, $currentDateTime);
+                    $shd = mysqli_fetch_row($dataR);
+
+                    $hoaDonModel->addHoaDon($username, $roomID, $currentDateTime, '', '', 0, $shd[5], $tiencoc, $phuongthucthanhtoan);
+                    echo '<script>window.history.back();</script>';
+                    echo '<script>window.history.back();</script>';
+                } else {
+                    $roomOrdered->addRoomOrdered($roomID, $currentDateTime, '', $loaiphong, $gia, $username, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh);
+                    $roomModel->updateStatusRoom($roomID, 'Đã đặt', $username);
+                    $customerModel->addCustomer($username, $cccd, $sdt, $ngaysinh, $quoctich, $diachi, $gioitinh, 1, 'Đã đặt');
+
+                    $dataR = $roomOrdered->getSHD($roomID, $username, $currentDateTime);
+                    $shd = mysqli_fetch_row($dataR);
+
+                    $hoaDonModel->addHoaDon($username, $roomID, $currentDateTime, '', '', 0, $shd[5], $tiencoc, $phuongthucthanhtoan);
+                    echo '<script>window.history.back();</script>';
+                    echo '<script>window.history.back();</script>';
+                }
             }
         }
 
 
         //nhan phong
         if (isset($_POST['btnnhanphong'])) {
-
-            $ngaynhanphong = $_POST['ngaynhanphong'];
+            $ngaynhanphong = date('Y-m-d H:i:s');
 
             $dataRoom = $roomModel->getARoom($roomID);
             $room = mysqli_fetch_row($dataRoom);
@@ -75,6 +140,7 @@ class chitietphong extends Controller
 
             $hoaDonModel->updateNgayNhan($room[3], $roomID, $ngaynhanphong);
             $roomModel->updateTrangthaiphong($roomID, 'Đã nhận');
+            echo '<script>window.history.back();</script>';
         }
 
 
@@ -87,34 +153,60 @@ class chitietphong extends Controller
         }
 
 
-        //tra phong
-        if (isset($_POST['btntraphong'])) {
-            $ngaytraphong = $_POST['ngaytraphong'];
 
-            $dataRoom = $roomModel->getARoom($roomID);
-            $room = mysqli_fetch_row($dataRoom);
-
-
-            $hoaDonModel->updateNgayTra($room[3], $roomID, $ngaytraphong);
-            $roomModel->updateTrangthaiphong($roomID, 'Đang trống');
-            $roomModel->setPhongtrong($roomID);
-            $customerModel->suatrangthaidat($room[3]);
-        }
 
 
         //datdichvu
         if (isset($_POST['datdichvu'])) {
-            if (isset($_POST['aa'])) {
+            $arrTendichvu = [];
+            $arrSoluong = [];
+            $arrGia = [];
+            $arrThanhtien = [];
+            $lengthService = $_POST['lengthService'];
 
-                $n = $_POST['aa'];
-                echo $n;
+            $tenkhachhang = $_POST['kh'];
+            $ngaydat = $_POST['ngayd'];
+            $dataR = $roomOrdered->getSHD($roomID, $tenkhachhang, $ngaydat);
+            $sohopdong = mysqli_fetch_assoc($dataR);
+            for ($i = 0; $i < $lengthService; $i++) {
+                array_push($arrTendichvu, $_POST['tendichvu' . $i + 1]);
+                array_push($arrSoluong, $_POST['thanhtien' . $i + 1] / $_POST['gia' . $i + 1]);
+                array_push($arrGia, $_POST['gia' . $i + 1]);
+                array_push($arrThanhtien, $_POST['thanhtien' . $i + 1]);
             }
+
+            for ($j = 0; $j < count($arrSoluong); $j++) {
+                if ($arrSoluong[$j] > 0) {
+                    $serviceModel->addService($tenkhachhang, $sohopdong['sohopdong'], $arrTendichvu[$j], $arrSoluong[$j], $arrGia[$j], $arrThanhtien[$j]);
+                }
+            }
+            echo '<script>alert("Bạn đã đặt xong các dịch vụ");</script>';
+            echo '<script>window.history.back();</script>';
         }
 
 
-        $dataService = $serviceModel->getAllService();
-        $dataRoom =  $roomModel->getARoom($roomID);
-        $room = mysqli_fetch_row($dataRoom);
+
+        //tra phong
+        if (isset($_POST['btntraphong'])) {
+            $tongthanhtoan = $_POST['tongthanhtoan'];
+
+            $ngaytraphong = date('Y-m-d H:i:s');
+
+            $dataRoom = $roomModel->getARoom($roomID);
+            $room = mysqli_fetch_row($dataRoom);
+
+            $tenkhachhang = $_POST['tenkh'];
+            $ngaydat = $_POST['nd'];
+            $dataR = $roomOrdered->getSHD($roomID, $tenkhachhang, $ngaydat);
+            $sohopdong = mysqli_fetch_assoc($dataR);
+
+
+            $hoaDonModel->updateNgayTra($sohopdong['sohopdong'], $ngaytraphong, $tongthanhtoan);
+            $roomModel->updateTrangthaiphong($roomID, 'Đang trống');
+            $roomModel->setPhongtrong($roomID);
+            $customerModel->suatrangthaidat($room[3]);
+            echo '<script>window.history.back();</script>';
+        }
 
         if (isset($_GET['roomID'])) {
             // var_dump($_GET['roomID']);
@@ -123,7 +215,8 @@ class chitietphong extends Controller
             "container" => "chitietphong",
             "room" => $room,
             "dataService" => $dataService,
-            "hoaDonModel" => $hoaDonModel
+            "hoaDonModel" => $hoaDonModel,
+            // "dataDichvu" => $dataDichvu
         ]);
     }
 

@@ -22,11 +22,10 @@ class quanLyPhong extends Controller
 
             // echo $tenphong, $loaiphong, $trangthaiphong, $gia;
         }
+        // $loc = "";
 
         if (isset($_POST['loc'])) {
             $loc = $_POST['locphong'];
-
-            echo $loc;
         }
 
 
